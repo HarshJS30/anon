@@ -12,7 +12,7 @@ export function Create(){
     const navigate = useNavigate();
 
     async function GetCode() {
-        const res = await fetch("http://localhost:3000/api/create-room")
+        const res = await fetch("https://anon-1rcv.onrender.com/api/create-room")
         if (!res.ok) {
             setError("Sorry our backend is down ;(!") 
         } else {
