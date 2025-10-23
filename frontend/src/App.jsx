@@ -1,6 +1,6 @@
 import './App.css'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import { Create } from './components/Create/create';
+import { Create } from './components/Create/Create';
 import { Home } from './components/Home/Home';
 import { useEffect } from 'react';
 import { socket } from './socket';
