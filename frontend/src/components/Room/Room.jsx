@@ -1,5 +1,5 @@
 import styles from '../../components/Room/Room.module.css';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { socket } from "../../socket";
 
@@ -9,7 +9,8 @@ export function Room(){
     const [participants,setParticipants] = useState([]);
     const [inputMessage, setInputMessage] = useState('');
     const [error,setError] = useState();
-    const username = localStorage.getItem('username')
+    const username = localStorage.getItem('username');
+    const messagesEndRef = useRef(null);
 
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -24,6 +25,10 @@ export function Room(){
         setInputMessage('')
     }
 
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages]);
+
     useEffect(()=>{
         socket.emit('join-room',{
             roomCode: code,
@@ -31,17 +36,14 @@ export function Room(){
         });
 
         socket.on('message',(msgObj)=>{
-            console.log(msgObj)
             setMessages(prev=>[...prev,msgObj])
         })
 
         socket.on('user-left',(data)=>{
-            console.log(`${data.username} left`)
             setMessages(prev => [...prev, {username: "System", text:`${data.username} left the room`}])
         })
 
         socket.on('error',(error)=>{
-            console.log(error.message)
             setError(error.message)
             if (error.message === 'Username already taken in this room') {
                 setTimeout(() => {
@@ -51,7 +53,6 @@ export function Room(){
         })
 
         socket.on('total-participants',(data)=>{
-            console.log(data)
             setParticipants(data)
         })
 
@@ -61,7 +62,7 @@ export function Room(){
             socket.off('error')
             socket.off('total-participants')
         }
-    },[code],[participants])
+    },[code])
 
     return (
     <div className={styles.chat}>
@@ -94,6 +95,7 @@ export function Room(){
                         </div>
                     )
                 ))}
+                <div ref={messagesEndRef} />
             </div>
         
             <form onSubmit={handleSubmit} className={styles.messageForm}>

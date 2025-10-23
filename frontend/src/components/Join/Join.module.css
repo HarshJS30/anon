@@ -1,98 +1,219 @@
-.join{
+.join {
     background-color: #1e293b !important;
-    height: 89vh;
+    min-height: 100vh;
     color: white;
     font-family: 'Poppins', sans-serif;
     padding: 25px;
     display: flex;
+    gap: 20px;
 }
 
-.left{
+.left {
     width: 35%;
     padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.right{
+
+.right {
     width: 65%;
     padding: 20px;
-}
-.image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
-    left: 300px;
-    top: 120px;
+}
+
+.image {
+    max-width: 500px;
+    width: 60%;
     opacity: 0.6;
 }
-.box{
+
+.box {
     width: 100%;
-    height: 90%;
+    max-width: 500px;
     background-color: #fff;
     border-radius: 25px;
-    overflow: hidden;
+    padding: 40px 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
-.head1{
+
+.iconbox1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.head1 {
     color: #075985;
-    margin-left: 20%;
     font-weight: 500;
-    position: relative;
+    font-size: 24px;
+    margin: 0;
 }
-.para{
-    color: #4b5563;
-    margin-left: 9%;
-    font-size: 18px;
-}
-.ic1{
+
+.ic1 {
     color: #075985;
     font-size: 27px;
-    position: absolute;
-    top: 73px;
-    right: 1245px;
-    margin: none;
 }
-.ic2{
+
+.para {
+    color: #4b5563;
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.ic2 {
     color: #87dbff;
-    position: absolute;
     font-size: 25px;
-    top: 206px;
-    right: 1245px;
+    display: block;
+    margin: 0 auto 10px;
 }
-.rnc{
-    background-color: #e5f4fd;
-    color: #075985;
-    font-size: 30px;
-    font-weight: 600;
-    width: 75%;
-    height: 10%;
-    margin-left: 30px;
-    margin-top: 50px;
-    border-radius: 15px;
-    border: 2px #87dbff dashed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-.head2{
+
+.head2 {
     color: #0891b2;
     font-size: 20px;
     font-weight: 500;
-    margin-left: 20%;
+    text-align: center;
+    margin: 0 0 30px;
 }
-.jn1,.cr1{
-    margin-left: 45px;
-    width: 80%;
-    height: 35px;
+
+.rnc {
+    background-color: #e5f4fd;
+    color: #075985;
+    font-size: clamp(20px, 5vw, 30px);
+    font-weight: 600;
+    width: 90%;
+    margin: 0 auto 30px;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px #87dbff dashed;
+    text-align: center;
+    display: block;
+}
+
+.rnc::placeholder {
+    color: #87dbff;
+    opacity: 0.6;
+}
+
+.jn1, .cr1 {
+    width: 90%;
+    height: 45px;
     background-color: #0369a1;
     color: #fff;
     border-radius: 10px;
     border: none;
-    font-family: 'Poppins',sans-serif;
-    position: relative;
-    top: 30px;
-    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 15px auto;
 }
-.error{
-    position: absolute;
-    color: red;
-    left: 100px;
-    top: 250px;
-    width: 300px;
+
+.jn1:hover, .cr1:hover {
+    background-color: #075985;
+}
+
+.error {
+    color: #dc2626;
+    text-align: center;
+    background-color: #fee;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px;
+    font-size: 14px;
+}
+
+@media (max-width: 1024px) {
+    .join {
+        flex-direction: column;
+        padding: 20px;
+    }
+    
+    .left, .right {
+        width: 100%;
+        padding: 10px;
+    }
+    
+    .right {
+        display: none;
+    }
+    
+    .box {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .join {
+        padding: 15px;
+    }
+    
+    .box {
+        padding: 30px 15px;
+        border-radius: 20px;
+    }
+    
+    .head1 {
+        font-size: 20px;
+    }
+    
+    .ic1 {
+        font-size: 22px;
+    }
+    
+    .para {
+        font-size: 16px;
+    }
+    
+    .head2 {
+        font-size: 18px;
+    }
+    
+    .rnc {
+        width: 95%;
+        padding: 15px;
+        font-size: clamp(18px, 4vw, 24px);
+    }
+    
+    .jn1, .cr1 {
+        width: 95%;
+        height: 40px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .box {
+        padding: 25px 12px;
+    }
+    
+    .iconbox1 {
+        gap: 10px;
+    }
+    
+    .head1 {
+        font-size: 18px;
+    }
+    
+    .para {
+        font-size: 14px;
+    }
+    
+    .rnc {
+        font-size: 18px;
+        padding: 12px;
+    }
+    
+    .jn1, .cr1 {
+        height: 38px;
+        font-size: 13px;
+    }
 }

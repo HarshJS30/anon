@@ -12,11 +12,11 @@ function App() {
 
   useEffect(()=>{
     if (socket.connected) {
-        console.log("Already connected!", socket.id);
+        console.log("Already connected!");
     }
   
     socket.on('connect', () => {
-        console.log("Connected!", socket.id);
+        console.log("Connected!");
     });
     
     return () => {
