@@ -79,6 +79,7 @@
     max-width: 70%;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    min-height: fit-content;
 }
 
 .messageUsername {
