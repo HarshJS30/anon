@@ -157,6 +157,9 @@
 @media (max-width: 768px) {
     .create {
         padding: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
     .box {
@@ -182,7 +185,7 @@
     }
     
     .rnc {
-        width: 95%;
+        width: 90%;
         padding: 15px;
         font-size: clamp(18px, 4vw, 24px);
     }

@@ -72,8 +72,7 @@ app.get('/api/create-room', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-    console.log('User connected', socket.id);
-    
+     
     socket.on('join-room', (data) => {
         const roomCode = data.roomCode;
         if (rooms[roomCode]) {
@@ -88,7 +87,6 @@ io.on('connection', (socket) => {
                 socket.username = data.name;
                 socket.currentRoom = roomCode;
                 rooms[roomCode]["participants"].push(data.name);
-                console.log(`Socket ${socket.id} (${data.name}) joined room ${roomCode}`);
                 socket.emit('previous-messages', rooms[roomCode].messages);
                 io.to(roomCode).emit('total-participants',rooms[roomCode]["participants"])
             } else {
@@ -106,7 +104,7 @@ io.on('connection', (socket) => {
             username:socket.username,
             timeStamp:Date.now()
         };
-        console.log('Message:', msgObj);
+
         if (rooms[roomCode]) {
             io.to(roomCode).emit('message', msgObj);
             rooms[roomCode]["messages"].push(msgObj);
@@ -130,7 +128,6 @@ io.on('connection', (socket) => {
             if (rooms[roomCode].participants.length === 0) {
                 delete rooms[roomCode];
             }
-            console.log(`User ${username} (${socket.id}) left room ${roomCode}`);
         }
     });
 });

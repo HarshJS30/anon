@@ -173,6 +173,9 @@
         padding: 15px;
         max-height: 200px;
         border-bottom: 2px solid #1f2d44;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
     .left h1 {
