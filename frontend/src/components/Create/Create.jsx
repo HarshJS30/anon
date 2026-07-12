@@ -9,17 +9,27 @@ export function Create(){
     const [code, setCode] = useState('')
     const [error, setError] = useState('')
     const [name, setName] = useState('')
+    const [isLoading, setIsLoading] = useState(true)
     const navigate = useNavigate();
 
     async function GetCode() {
-        const res = await fetch("https://anon-1rcv.onrender.com/api/create-room")
-        if (!res.ok) {
-            setError("Sorry our backend is down ;(!") 
-        } else {
-            const data = await res.json();
-            setCode(data.code)
-            setName(data.username)
-            localStorage.setItem('username',data.username)
+        setIsLoading(true)
+        setError('')
+
+        try {
+            const res = await fetch("https://anon-1rcv.onrender.com/api/create-room")
+            if (!res.ok) {
+                setError("Sorry our backend is down ;(!")
+                setCode('')
+                setName('')
+            } else {
+                const data = await res.json();
+                setCode(data.code)
+                setName(data.username)
+                localStorage.setItem('username',data.username)
+            }
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -38,14 +48,16 @@ export function Create(){
                     <p className={styles.para}>Your room code is your key. Share it only with those you trust.</p>
                     <FaUser className={styles.ic2} />
                     <h5 className={styles.head2}>{name}</h5>
-                    <div className={styles.rnc}>{code}</div>
+                    <div className={styles.rnc}>
+                        {isLoading ? <span className={styles.loadingText}>Generating room code...</span> : code}
+                    </div>
                     
                     {error && <div className={styles.error}>{error}</div>}
                     
                     <div className={styles.buttons}>
-                        <button className={styles.gn1} onClick={GetCode}>Generate Different Code</button>
-                        <button className={styles.cr1} onClick={()=>navigate(`/room/${code}`)}>Create this room</button>
-                        <button className={styles.jn1} onClick={()=>navigate('/join')}>Join a room</button>
+                        <button className={styles.gn1} onClick={GetCode} disabled={isLoading}>Generate Different Code</button>
+                        <button className={styles.cr1} onClick={()=>navigate(`/room/${code}`)} disabled={isLoading || !code}>Create this room</button>
+                        <button className={styles.jn1} onClick={()=>navigate('/join')} disabled={isLoading}>Join a room</button>
                     </div>
                 </div>
             </div>
